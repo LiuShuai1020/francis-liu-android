@@ -19,10 +19,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", "WEB_VIEW_URL", WEB_VIEW_URL
+            buildConfigField "String", "NATIVE_VIEW_URL", NATIVE_VIEW_URL
             buildConfigField "Boolean", "LOG_DEBUG", "false"
         }
         debug {
             buildConfigField "String", "WEB_VIEW_URL", WEB_VIEW_URL
+            buildConfigField "String", "NATIVE_VIEW_URL", NATIVE_VIEW_URL
             buildConfigField "Boolean", "LOG_DEBUG", "true"
         }
     }

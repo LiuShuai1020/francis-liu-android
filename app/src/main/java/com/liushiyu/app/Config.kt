@@ -7,6 +7,10 @@ class Config {
         return BuildConfig.WEB_VIEW_URL
     }
 
+    fun getNativeUrl() : String {
+        return BuildConfig.NATIVE_VIEW_URL
+    }
+
     fun getLogDebug() : Boolean {
         return BuildConfig.LOG_DEBUG
     }
