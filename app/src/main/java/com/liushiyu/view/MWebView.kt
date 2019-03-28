@@ -2,13 +2,12 @@ package com.liushiyu.view
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Bitmap
-import android.net.http.SslError
 import android.os.Build
 import android.util.AttributeSet
-import android.webkit.*
+import android.webkit.WebResourceRequest
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import com.liushiyu.app.Config
-import com.liushiyu.utils.LOG
 
 class MWebView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
 
@@ -26,17 +25,7 @@ class MWebView @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
     }
 
     private val client = object : WebViewClient() {
-        override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-            super.onPageStarted(view, url, favicon)
-            log("onPageStarted")
-        }
-
-        override fun onPageCommitVisible(view: WebView?, url: String?) {
-            super.onPageCommitVisible(view, url)
-            log("onPageCommitVisible")
-        }
         override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
-            log("shouldOverrideUrlLoading")
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 view?.loadUrl(request?.url.toString())
             } else {
@@ -44,34 +33,6 @@ class MWebView @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
             }
             return false
         }
-
-        override fun onPageFinished(view: WebView?, url: String?) {
-            super.onPageFinished(view, url)
-            log("onPageFinished")
-        }
-
-        override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
-            super.onReceivedError(view, request, error)
-            log("onReceivedError")
-        }
-
-        override fun onReceivedHttpError(
-            view: WebView?,
-            request: WebResourceRequest?,
-            errorResponse: WebResourceResponse?
-        ) {
-            super.onReceivedHttpError(view, request, errorResponse)
-            log("onReceivedHttpError errorResponse = " + errorResponse.toString())
-        }
-
-        override fun onReceivedSslError(view: WebView?, handler: SslErrorHandler?, error: SslError?) {
-            super.onReceivedSslError(view, handler, error)
-            log("onReceivedSslError")
-        }
-    }
-
-    private fun log(s: String) {
-        LOG().e("MWebView", s)
     }
 }
 
